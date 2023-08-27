@@ -1,0 +1,16 @@
+<.table id="games" rows={@games} row_click={&JS.navigate(~p"/games/#{&1}")}>
+  <:col :let={game} label="Status"><%= game.status %></:col>
+  <:col :let={game} label="Date"><%= game.date %></:col>
+  <:col :let={game} label="Players"><%= player_names(game) %></:col>
+  <:action :let={game}>
+    <div class="sr-only">
+      <.link navigate={~p"/games/#{game}"}>Show</.link>
+    </div>
+    <.link navigate={~p"/games/#{game}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={game}>
+    <.link href={~p"/games/#{game}"} method="delete" data-confirm="Are you sure?">
+      Delete
+    </.link>
+  </:action>
+</.table>

@@ -1,0 +1,17 @@
+<.simple_form :let={f} for={@changeset} action={@action}>
+  <.error :if={@changeset.action}>
+    Oops, something went wrong! Please check the errors below.
+  </.error>
+  <.input
+    field={f[:status]}
+    type="select"
+    label="Status"
+    prompt="Choose a value"
+    options={Ecto.Enum.values(ScoreGoblin.Games.Game, :status)}
+  />
+  <.input field={f[:date]} type="datetime-local" label="Date" />
+  <.input field={f[:player_ids]} type="select" multiple={true} options={player_options(@changeset)} />
+  <:actions>
+    <.button>Save Game</.button>
+  </:actions>
+</.simple_form>

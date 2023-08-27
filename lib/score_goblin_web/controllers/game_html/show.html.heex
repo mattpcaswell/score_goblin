@@ -1,0 +1,17 @@
+<.header>
+  Game <%= @game.id %>
+  <:subtitle>This is a game record from your database.</:subtitle>
+  <:actions>
+    <.link href={~p"/games/#{@game}/edit"}>
+      <.button>Edit game</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Status"><%= @game.status %></:item>
+  <:item title="Date"><%= @game.date %></:item>
+  <:item title="Players"><%= player_names(@game) %></:item>
+</.list>
+
+<.back navigate={~p"/games"}>Back to games</.back>
