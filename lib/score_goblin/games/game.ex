@@ -8,7 +8,7 @@ defmodule ScoreGoblin.Games.Game do
 
     many_to_many(
       :players, 
-      ScoreGoblin.Accounts.User, 
+      ScoreGoblin.Players.Player, 
       join_through: ScoreGoblin.Games.Participant, 
       join_keys: [game_id: :id, player_id: :id], 
       unique: true, 

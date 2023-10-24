@@ -7,7 +7,7 @@ defmodule ScoreGoblin.Games.Participant do
     field :status, Ecto.Enum, values: [:won, :lost, :tie, :none], default: :none
     field :points, :integer, default: 0
 
-    belongs_to :user, ScoreGoblin.Accounts.User, foreign_key: :player_id
+    belongs_to :player, ScoreGoblin.Players.Player, foreign_key: :player_id
     belongs_to :game, ScoreGoblin.Games.Game
 
     timestamps()
@@ -15,7 +15,7 @@ defmodule ScoreGoblin.Games.Participant do
 
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:status, :points, :user_id, :game_id])
-    |> validate_required([:status, :points, :user_id, :game_id])
+    |> cast(params, [:status, :points, :player_id, :game_id])
+    |> validate_required([:status, :points, :player_id, :game_id])
   end
 end

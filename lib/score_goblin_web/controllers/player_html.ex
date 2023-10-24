@@ -1,13 +1,13 @@
-defmodule ScoreGoblinWeb.UserHTML do
+defmodule ScoreGoblinWeb.PlayerHTML do
   use ScoreGoblinWeb, :html
 
-  embed_templates "user_html/*"
+  embed_templates "player_html/*"
 
   @doc """
-  Renders a user form.
+  Renders a player form.
   """
   attr :changeset, Ecto.Changeset, required: true
   attr :action, :string, required: true
 
-  def user_form(assigns)
+  def player_form(assigns)
 end

@@ -37,8 +37,8 @@ defmodule ScoreGoblinWeb.GameHTML do
       |> Ecto.Changeset.get_change(:players, [])
       |> Enum.map(& &1.data.id)
 
-    for user <- ScoreGoblin.Accounts.list_users() do
-      [key: user.name, value: user.id, selected: user.id in current_players]
+    for player <- ScoreGoblin.Players.list_players() do
+      [key: player.name, value: player.id, selected: player.id in current_players]
     end
   end
 end

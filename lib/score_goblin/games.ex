@@ -81,7 +81,7 @@ defmodule ScoreGoblin.Games do
 
   defp players_by_id(nil), do: []
   defp players_by_id(ids) do
-    Repo.all(from p in ScoreGoblin.Accounts.User, where: p.id in ^ids)
+    Repo.all(from p in ScoreGoblin.Players.Player, where: p.id in ^ids)
   end
 
   @doc """

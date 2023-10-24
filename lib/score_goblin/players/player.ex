@@ -1,10 +1,9 @@
-defmodule ScoreGoblin.Accounts.User do
+defmodule ScoreGoblin.Players.Player do
   use Ecto.Schema
   import Ecto.Changeset
 
-  schema "users" do
+  schema "players" do
     field :name, :string
-    field :email, :string
 
     many_to_many(
       :games, 
@@ -19,11 +18,9 @@ defmodule ScoreGoblin.Accounts.User do
   end
 
   @doc false
-  def changeset(user, attrs) do
-    user
-    |> cast(attrs, [:name, :email])
-    |> validate_required([:name, :email])
-    |> unique_constraint(:email)
-    |> validate_format(:email, ~r/@/)
+  def changeset(player, attrs) do
+    player
+    |> cast(attrs, [:name])
+    |> validate_required([:name])
   end
 end

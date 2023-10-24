@@ -19,7 +19,7 @@ defmodule ScoreGoblinWeb.Router do
 
     get "/", PageController, :home
 
-    resources "/users", UserController
+    resources "/players", PlayerController
     resources "/games", GameController
   end
 
