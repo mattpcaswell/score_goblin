@@ -4,6 +4,7 @@ defmodule ScoreGoblinWeb.PageController do
   def home(conn, _params) do
     # The home page is often custom made,
     # so skip the default app layout.
-    render(conn, :home, layout: false)
+    all_games = ScoreGoblin.Games.list_games()
+    render(conn, :home, all_games: all_games)
   end
 end
