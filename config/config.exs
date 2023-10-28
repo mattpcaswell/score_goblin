@@ -7,6 +7,8 @@
 # General application configuration
 import Config
 
+require Logger
+
 config :score_goblin,
   ecto_repos: [ScoreGoblin.Repo]
 
@@ -27,7 +29,24 @@ config :score_goblin, ScoreGoblinWeb.Endpoint,
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-config :score_goblin, ScoreGoblin.Mailer, adapter: Swoosh.Adapters.Local
+config :score_goblin, ScoreGoblin.Mailer, 
+  adapter: Swoosh.Adapters.SMTP,
+  relay: "todo",
+  username: "todo",
+  password: "todo",
+  ssl: false,
+  tls: :always,
+  auth: :always,
+  port: 587,
+
+
+  trace_fun: fn s, a -> Logger.notice(:io_lib.format(s, a)) end,
+  # dkim: [
+  #   s: "default", d: "domain.com",
+  #   private_key: {:pem_plain, File.read!("priv/keys/domain.private")}
+  # ],
+  retries: 2,
+  no_mx_lookups: false
 
 # Configure esbuild (the version is required)
 config :esbuild,

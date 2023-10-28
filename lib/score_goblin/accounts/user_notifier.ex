@@ -1,19 +1,37 @@
 defmodule ScoreGoblin.Accounts.UserNotifier do
   import Swoosh.Email
+  require Logger
 
   alias ScoreGoblin.Mailer
 
   # Delivers the email using the application mailer.
   defp deliver(recipient, subject, body) do
+    Logger.info "Deliver called!"
     email =
       new()
       |> to(recipient)
-      |> from({"ScoreGoblin", "contact@example.com"})
+      |> from({"ScoreGoblin", "scoregoblin@bigtoadsoftware.com"})
       |> subject(subject)
       |> text_body(body)
 
-    with {:ok, _metadata} <- Mailer.deliver(email) do
+    Logger.info "trying to deliver"
+    with {:ok, metadata} <- Mailer.deliver(email) do
+      Logger.info "OK!"
+      Logger.info metadata
       {:ok, email}
+    else
+      {:error, type, message} ->
+        Logger.info "ERROR"
+        Logger.info "type"
+        Logger.info type
+        Logger.info "message"
+        Logger.info message
+        {:error, type, message}
+      {:error, reason} ->
+        Logger.info "ERROR"
+        Logger.info "reason"
+        Logger.info((Kernel.inspect reason))
+        {:error, reason}
     end
   end
 
