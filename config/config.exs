@@ -20,33 +20,26 @@ config :score_goblin, ScoreGoblinWeb.Endpoint,
     layout: false
   ],
   pubsub_server: ScoreGoblin.PubSub,
-  live_view: [signing_salt: "p3z6yq9v"]
+  live_view: [signing_salt: "p3z6yq9v"],
+  http: [port: 4000],
+  https: [
+    port: 4001,
+    cipher_suite: :strong,
+    certfile: "priv/cert/selfsigned.pem",
+    keyfile: "priv/cert/selfsigned_key.pem"
+  ]
 
 # Configures the mailer
-#
-# By default it uses the "Local" adapter which stores the emails
-# locally. You can see the emails in your browser, at "/dev/mailbox".
-#
-# For production it's recommended to configure a different adapter
-# at the `config/runtime.exs`.
+smtp_relay =
 config :score_goblin, ScoreGoblin.Mailer, 
   adapter: Swoosh.Adapters.SMTP,
-  relay: "todo",
-  username: "todo",
-  password: "todo",
-  ssl: false,
-  tls: :always,
-  auth: :always,
-  port: 587,
-
-
   trace_fun: fn s, a -> Logger.notice(:io_lib.format(s, a)) end,
-  # dkim: [
-  #   s: "default", d: "domain.com",
-  #   private_key: {:pem_plain, File.read!("priv/keys/domain.private")}
-  # ],
-  retries: 2,
-  no_mx_lookups: false
+  relay: "email-smtp.us-east-2.amazonaws.com",
+  port: 587,
+  username: System.get_env("AWS_SES_USERNAME"),
+  password: System.get_env("AWS_SES_PASSWORD"),
+  tls: :always,
+  tls_options: [ verify: :verify_none ]
 
 # Configure esbuild (the version is required)
 config :esbuild,

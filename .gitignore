@@ -35,3 +35,5 @@ score_goblin-*.tar
 npm-debug.log
 /assets/node_modules/
 
+# don't include secrets
+setup_env.sh
