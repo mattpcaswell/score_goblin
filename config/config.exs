@@ -21,6 +21,7 @@ config :score_goblin, ScoreGoblinWeb.Endpoint,
   ],
   pubsub_server: ScoreGoblin.PubSub,
   live_view: [signing_salt: "p3z6yq9v"],
+  server: true,
   http: [port: 4000],
   https: [
     port: 4001,
