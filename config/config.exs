@@ -33,7 +33,6 @@ config :score_goblin, ScoreGoblinWeb.Endpoint,
 smtp_relay =
 config :score_goblin, ScoreGoblin.Mailer, 
   adapter: Swoosh.Adapters.SMTP,
-  trace_fun: fn s, a -> Logger.notice(:io_lib.format(s, a)) end,
   relay: "email-smtp.us-east-2.amazonaws.com",
   port: 587,
   username: System.get_env("AWS_SES_USERNAME"),
