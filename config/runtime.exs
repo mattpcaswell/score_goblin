@@ -68,10 +68,6 @@ if config_env() == :prod do
       keyfile: System.get_env("SSL_KEY_PATH"),
       certfile: System.get_env("SSL_CERT_PATH")
     ],
-    force_ssl: [
-      hsts: true,
-      rewrite_on: [:x_forwarded_host, :x_forwarded_port, :x_forwarded_proto]
-    ],
     secret_key_base: secret_key_base
 
   # ## SSL Support
