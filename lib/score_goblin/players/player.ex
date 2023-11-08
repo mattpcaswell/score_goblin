@@ -5,6 +5,12 @@ defmodule ScoreGoblin.Players.Player do
   schema "players" do
     field :name, :string
 
+    field :wins, :integer, virtual: true
+    field :losses, :integer, virtual: true
+    field :ties, :integer, virtual: true
+
+    has_many :participant, ScoreGoblin.Games.Participant
+
     many_to_many(
       :games, 
       ScoreGoblin.Games.Game,

@@ -1,0 +1,11 @@
+<.table id="players" rows={@players} row_click={&JS.navigate(~p"/players/#{&1}")}>
+  <:col :let={player} label="Name"><%= player.name %></:col>
+  <:col :let={player} label="W"><%= player.wins %></:col>
+  <:col :let={player} label="L"><%= player.losses %></:col>
+  <:col :let={player} label="T"><%= player.ties %></:col>
+  <:action :let={player}>
+    <div class="sr-only">
+      <.link navigate={~p"/players/#{player}"}>Show</.link>
+    </div>
+  </:action>
+</.table>

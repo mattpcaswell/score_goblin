@@ -20,7 +20,32 @@ defmodule ScoreGoblin.Players do
   def list_players do
     Player
     |> Repo.all()
-    |> Repo.preload(:games)
+    |> Repo.preload([:games, :participant])
+    |> get_stats_for_all()
+  end
+
+  defp get_stats_for_all(list) do
+    get_stats(list)
+  end
+  defp get_stats([%Player{} = player | rest]) do
+    player = %{player | wins: num_wins(player)}
+    player = %{player | losses: num_losses(player)}
+    player = %{player | ties: num_ties(player)}
+
+    [player | get_stats(rest)]
+  end
+  defp get_stats([]) do
+    []
+  end
+
+  defp num_wins(%Player{} = player) do
+    Enum.count(player.participant, &(&1.status == :won))
+  end
+  defp num_losses(%Player{} = player) do
+    Enum.count(player.participant, &(&1.status == :lost))
+  end
+  defp num_ties(%Player{} = player) do
+    Enum.count(player.participant, &(&1.status == :tie))
   end
 
   @doc """
